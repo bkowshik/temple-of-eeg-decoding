@@ -1,0 +1,3458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Where open EEG data lives, and how much of it there is">
+
+<title>EEG datasets – eegtemple</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fd4adef244fdc67307115b663478f771.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="EEG datasets – eegtemple">
+<meta property="og:description" content="Where open EEG data lives, and how much of it there is">
+<meta property="og:site_name" content="eegtemple">
+<meta name="twitter:title" content="EEG datasets – eegtemple">
+<meta name="twitter:description" content="Where open EEG data lives, and how much of it there is">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">eegtemple</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./datasets.html">EEG datasets</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">temple-of-eeg-decoding</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">core</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datasets.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">EEG datasets</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#at-a-glance" id="toc-at-a-glance" class="nav-link active" data-scroll-target="#at-a-glance">At a glance</a></li>
+  <li><a href="#where-eeg-data-lives" id="toc-where-eeg-data-lives" class="nav-link" data-scroll-target="#where-eeg-data-lives">Where EEG data lives</a>
+  <ul class="collapse">
+  <li><a href="#eeg-focused-repositories-and-corpora" id="toc-eeg-focused-repositories-and-corpora" class="nav-link" data-scroll-target="#eeg-focused-repositories-and-corpora">EEG-focused repositories and corpora</a></li>
+  <li><a href="#general-purpose-repositories" id="toc-general-purpose-repositories" class="nav-link" data-scroll-target="#general-purpose-repositories">General-purpose repositories</a></li>
+  <li><a href="#aggregators-and-loader-libraries" id="toc-aggregators-and-loader-libraries" class="nav-link" data-scroll-target="#aggregators-and-loader-libraries">Aggregators and loader libraries</a></li>
+  </ul></li>
+  <li><a href="#brain-computer-interfaces" id="toc-brain-computer-interfaces" class="nav-link" data-scroll-target="#brain-computer-interfaces">Brain-computer interfaces</a>
+  <ul class="collapse">
+  <li><a href="#motor-imagery" id="toc-motor-imagery" class="nav-link" data-scroll-target="#motor-imagery">Motor imagery</a></li>
+  <li><a href="#motor-execution" id="toc-motor-execution" class="nav-link" data-scroll-target="#motor-execution">Motor execution</a></li>
+  <li><a href="#erp-p300" id="toc-erp-p300" class="nav-link" data-scroll-target="#erp-p300">ERP / P300</a></li>
+  <li><a href="#ssvep" id="toc-ssvep" class="nav-link" data-scroll-target="#ssvep">SSVEP</a></li>
+  <li><a href="#c-vep" id="toc-c-vep" class="nav-link" data-scroll-target="#c-vep">c-VEP</a></li>
+  </ul></li>
+  <li><a href="#clinical-sleep-and-resting-state" id="toc-clinical-sleep-and-resting-state" class="nav-link" data-scroll-target="#clinical-sleep-and-resting-state">Clinical, sleep and resting state</a>
+  <ul class="collapse">
+  <li><a href="#epilepsy-clinical" id="toc-epilepsy-clinical" class="nav-link" data-scroll-target="#epilepsy-clinical">Epilepsy &amp; clinical</a></li>
+  <li><a href="#sleep" id="toc-sleep" class="nav-link" data-scroll-target="#sleep">Sleep</a></li>
+  <li><a href="#resting-state" id="toc-resting-state" class="nav-link" data-scroll-target="#resting-state">Resting state</a></li>
+  <li><a href="#large-corpus" id="toc-large-corpus" class="nav-link" data-scroll-target="#large-corpus">Large corpus</a></li>
+  </ul></li>
+  <li><a href="#cognition-emotion-and-perception" id="toc-cognition-emotion-and-perception" class="nav-link" data-scroll-target="#cognition-emotion-and-perception">Cognition, emotion and perception</a>
+  <ul class="collapse">
+  <li><a href="#affective" id="toc-affective" class="nav-link" data-scroll-target="#affective">Affective</a></li>
+  <li><a href="#visual-perception" id="toc-visual-perception" class="nav-link" data-scroll-target="#visual-perception">Visual perception</a></li>
+  <li><a href="#auditory-speech" id="toc-auditory-speech" class="nav-link" data-scroll-target="#auditory-speech">Auditory &amp; speech</a></li>
+  <li><a href="#language" id="toc-language" class="nav-link" data-scroll-target="#language">Language</a></li>
+  <li><a href="#cognitive" id="toc-cognitive" class="nav-link" data-scroll-target="#cognitive">Cognitive</a></li>
+  </ul></li>
+  <li><a href="#corrections-and-additions" id="toc-corrections-and-additions" class="nav-link" data-scroll-target="#corrections-and-additions">Corrections and additions</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bkowshik/temple-of-eeg-decoding/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="datasets.html.md"><i class="bi bi-file-code"></i>Markdown</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">EEG datasets</h1>
+</div>
+
+<div>
+  <div class="description">
+    Where open EEG data lives, and how much of it there is
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>This page catalogs open EEG data: the places it is published, and the datasets themselves with their rough size. It is a map for finding data, not a benchmark. Every number comes from the dataset’s own page or paper, and a blank means the source doesn’t report it.</p>
+<p>Benchmark libraries cover one paradigm family each: 200 of MOABB’s 206 datasets, for example, are BCI paradigms (motor imagery, ERP, SSVEP and c-VEP), and it loads none of the large clinical or sleep corpora. Labs also tend to publish to one repository each, so no single source sees everything. The tables below span EEG repositories, general-purpose repositories, clinical corpora and lab websites.</p>
+<p>The catalog is two CSV files in the repo, <a href="https://github.com/bkowshik/temple-of-eeg-decoding/blob/main/catalog/sources.csv"><code>catalog/sources.csv</code></a> and <a href="https://github.com/bkowshik/temple-of-eeg-decoding/blob/main/catalog/datasets.csv"><code>catalog/datasets.csv</code></a>, so you can load, filter or correct it. Each row there also records the license, the reference, the page its numbers came from, and notes on how they were counted, including which numbers are approximate. Numbers were gathered on 3 November 2026.</p>
+<p><strong>Access:</strong></p>
+<ul>
+<li><strong>open</strong>: download directly, no account</li>
+<li><strong>registration</strong>: free account or login</li>
+<li><strong>DUA</strong>: signed data use agreement or credentialed access</li>
+<li><strong>request</strong>: apply to the lab or authors</li>
+</ul>
+<p><strong>Trials</strong> counts trials across all subjects and sessions; <strong>hours</strong> is total recording time. Dataset tables are sorted by number of subjects, and each name links to the dataset’s landing page.</p>
+<section id="at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
+<p>How many datasets the catalog holds for each paradigm, and how many of them you can download without an account.</p>
+<div id="a7f84023" class="cell">
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Paradigm</th>
+<th style="text-align: right;">Datasets</th>
+<th style="text-align: right;">Open</th>
+<th>Most subjects</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor imagery</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">28</td>
+<td><a href="https://physionet.org/content/eegmmidb/1.0.0/">PhysioNet EEG Motor Movement/Imagery (EEGBCI)</a> (109)</td>
+</tr>
+<tr class="even">
+<td>Motor execution</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Schwarz 2020 reach-and-grasp</a> (45)</td>
+</tr>
+<tr class="odd">
+<td>ERP / P300</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">17</td>
+<td><a href="https://physionet.org/content/bigp3bci/1.0.0/">bigP3BCI (Mainsah 2025)</a> (326)</td>
+</tr>
+<tr class="even">
+<td>SSVEP</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">9</td>
+<td><a href="https://doi.org/10.6084/m9.figshare.13560281">Wearable SSVEP dataset (Zhu 2021)</a> (102)</td>
+</tr>
+<tr class="odd">
+<td>c-VEP</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td><a href="https://doi.org/10.6084/m9.figshare.24864243">Zheng 2024 narrow-band c-VEP</a> (100)</td>
+</tr>
+<tr class="even">
+<td>Epilepsy &amp; clinical</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">15</td>
+<td><a href="https://dll.seecs.nust.edu.pk/downloads/">NMT Scalp EEG Dataset</a> (2,417)</td>
+</tr>
+<tr class="odd">
+<td>Sleep</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">8</td>
+<td><a href="https://bdsp.io/content/hsp/">Human Sleep Project (HSP)</a> (90,166)</td>
+</tr>
+<tr class="even">
+<td>Resting state</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td><a href="https://openneuro.org/datasets/ds005385">Dortmund Vital Study resting EEG (ds005385)</a> (608)</td>
+</tr>
+<tr class="odd">
+<td>Large corpus</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td><a href="https://bdsp.io/content/harvard-eeg-db/">Harvard Electroencephalography Database (HEEDB)</a> (109,178)</td>
+</tr>
+<tr class="even">
+<td>Affective</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1</td>
+<td><a href="https://doi.org/10.7303/syn50614194">FACED</a> (123)</td>
+</tr>
+<tr class="odd">
+<td>Visual perception</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">9</td>
+<td><a href="https://openneuro.org/datasets/ds003825">THINGS-EEG1</a> (50)</td>
+</tr>
+<tr class="even">
+<td>Auditory &amp; speech</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">14</td>
+<td><a href="https://doi.org/10.48804/K3VSND">SparrKULee</a> (85)</td>
+</tr>
+<tr class="odd">
+<td>Language</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td><a href="https://deepblue.lib.umich.edu/data/concern/data_sets/bg257f92t">Alice EEG (Brennan)</a> (49)</td>
+</tr>
+<tr class="even">
+<td>Cognitive</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5</td>
+<td><a href="https://ieee-dataport.org/open-access/stew-simultaneous-task-eeg-workload-dataset">STEW</a> (48)</td>
+</tr>
+<tr class="odd">
+<td><strong>All</strong></td>
+<td style="text-align: right;"><strong>166</strong></td>
+<td style="text-align: right;"><strong>126</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Where the cataloged datasets are hosted. No single repository holds most of them, which is why a catalog built from any one source misses a lot.</p>
+<div id="1c48b5a0" class="cell">
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Host</th>
+<th style="text-align: right;">Datasets</th>
+<th>Paradigms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lab website</td>
+<td style="text-align: right;">31</td>
+<td>Affective, Motor imagery, Epilepsy &amp; clinical, ERP / P300, SSVEP, Auditory &amp; speech, Sleep, Visual perception, Cognitive</td>
+</tr>
+<tr class="even">
+<td>OpenNeuro</td>
+<td style="text-align: right;">23</td>
+<td>Epilepsy &amp; clinical, Auditory &amp; speech, Resting state, Visual perception, Language, Motor imagery, Large corpus, Sleep, Affective</td>
+</tr>
+<tr class="odd">
+<td>Zenodo</td>
+<td style="text-align: right;">21</td>
+<td>ERP / P300, Auditory &amp; speech, Motor imagery, Sleep, Affective, SSVEP, c-VEP, Epilepsy &amp; clinical, Cognitive</td>
+</tr>
+<tr class="even">
+<td>Figshare</td>
+<td style="text-align: right;">14</td>
+<td>Motor imagery, SSVEP, Motor execution, ERP / P300, c-VEP, Epilepsy &amp; clinical, Cognitive</td>
+</tr>
+<tr class="odd">
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">10</td>
+<td>Motor imagery, ERP / P300, Motor execution</td>
+</tr>
+<tr class="even">
+<td>PhysioNet</td>
+<td style="text-align: right;">10</td>
+<td>Sleep, Epilepsy &amp; clinical, Motor imagery, ERP / P300, Cognitive</td>
+</tr>
+<tr class="odd">
+<td>NSRR</td>
+<td style="text-align: right;">7</td>
+<td>Sleep</td>
+</tr>
+<tr class="even">
+<td>OSF</td>
+<td style="text-align: right;">7</td>
+<td>Language, ERP / P300, Visual perception, Auditory &amp; speech, Cognitive</td>
+</tr>
+<tr class="odd">
+<td>TUH EEG</td>
+<td style="text-align: right;">7</td>
+<td>Epilepsy &amp; clinical, Large corpus</td>
+</tr>
+<tr class="even">
+<td>GigaDB</td>
+<td style="text-align: right;">4</td>
+<td>Motor imagery, ERP / P300, SSVEP</td>
+</tr>
+<tr class="odd">
+<td>BDSP</td>
+<td style="text-align: right;">2</td>
+<td>Large corpus, Sleep</td>
+</tr>
+<tr class="even">
+<td>Harvard Dataverse</td>
+<td style="text-align: right;">2</td>
+<td>Motor imagery</td>
+</tr>
+<tr class="odd">
+<td>Hugging Face</td>
+<td style="text-align: right;">2</td>
+<td>Visual perception</td>
+</tr>
+<tr class="even">
+<td>IEEE DataPort</td>
+<td style="text-align: right;">2</td>
+<td>Epilepsy &amp; clinical, Cognitive</td>
+</tr>
+<tr class="odd">
+<td>Kaggle</td>
+<td style="text-align: right;">2</td>
+<td>ERP / P300, Epilepsy &amp; clinical</td>
+</tr>
+<tr class="even">
+<td>Radboud Data Repository</td>
+<td style="text-align: right;">2</td>
+<td>c-VEP</td>
+</tr>
+<tr class="odd">
+<td>Stanford Digital Repository</td>
+<td style="text-align: right;">2</td>
+<td>Visual perception, Auditory &amp; speech</td>
+</tr>
+<tr class="even">
+<td>Synapse</td>
+<td style="text-align: right;">2</td>
+<td>Resting state, Affective</td>
+</tr>
+<tr class="odd">
+<td>16 other hosts</td>
+<td style="text-align: right;">16</td>
+<td>One dataset each: Borealis, DataverseNL, Deep Blue Data, DepositOnce (TU Berlin), FreiDok, G-Node GIN, GitHub, Google Drive, INDI (NITRC), KiltHub (Figshare), KU Leuven RDR, NEMAR, Recherche Data Gouv, RepOD, Tsinghua Cloud, Universidad de Valladolid repository</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The split holds even inside one benchmark. MOABB’s own table of its 206 datasets puts 54 on Zenodo, 19 of them from French labs such as GIPSA-lab and Inria. It puts 21 on PhysioNet, 20 of which are studies from a single P300 collection, bigP3BCI. All 19 on BNCI Horizon 2020 come from European labs, 8 of them Austrian. Figshare holds 17, OSF 13, and Harvard Dataverse 10, 7 of them from Chinese labs. All 4 on GigaDB come from Korean labs. Only 3 are on OpenNeuro, and 31 name no repository at all.</p>
+</section>
+<section id="where-eeg-data-lives" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="where-eeg-data-lives">Where EEG data lives</h2>
+<p>Three kinds of places publish EEG data. Counts are as each source reported them on 3 November 2026.</p>
+<section id="eeg-focused-repositories-and-corpora" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="eeg-focused-repositories-and-corpora">EEG-focused repositories and corpora</h3>
+<p>Repositories and corpora built for neural or clinical data. Counts are of EEG datasets, taken from each source’s API or catalog.</p>
+<div id="86276901" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th style="text-align: right;">EEG datasets</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Hours</th>
+<th>Access</th>
+<th>Python access</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://nemar.org">NEMAR</a></td>
+<td style="text-align: right;">652</td>
+<td style="text-align: right;">35,750</td>
+<td style="text-align: right;">105,150</td>
+<td>open</td>
+<td>REST API (api.nemar.org/datasets); HTTPS file tree (data.nemar.org); Zarr; EEGDash</td>
+<td><em>Approximate:</em> hours sum total_recording_duration for the 619 of 652 EEG datasets that report it. Mirrors 434 OpenNeuro EEG datasets (‘on’ IDs) and now hosts 218 of its own (‘nm’ IDs, 206 from one uploader), mostly BIDS conversions of BCI, PhysioNet and sleep datasets from other repositories.</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org">OpenNeuro</a></td>
+<td style="text-align: right;">468</td>
+<td style="text-align: right;">27,369</td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>GraphQL API (openneuro.org/crn/graphql); openneuro-py; DataLad; S3</td>
+<td><em>Approximate:</em> 468 of 1,935 readable public datasets list eeg among snapshot modalities, subjects summed per dataset (the API’s modality filter alone missed HBN Release 7); no hours field, but NEMAR’s mirror of 434 of them sums about 77,700 h. BIDS-only, so cognitive and clinical research labs dominate: only 3 of MOABB’s 206 BCI datasets live here.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bdsp.io">Brain Data Science Platform (BDSP)</a></td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>mixed</td>
+<td>web download after credentialing; per-project tools on GitHub (bdsp-core)</td>
+<td><em>Approximate:</em> 50 of 72 listed projects carry the ‘eeg’ topic, many of them paper data-and-code packages; 43 databases are credentialed or restricted, 5 open. Run by Stanford’s Clinical Data Animation Center with Harvard/MGH/BIDMC: Harvard EEG Database, Human Sleep Project v3.0 (119,234 PSG recordings, 90,166 patients), I-CARE, SPaRCNet.</td>
+</tr>
+<tr class="even">
+<td><a href="https://sleepdata.org">National Sleep Research Resource (NSRR)</a></td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">50,951</td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>NSRR Ruby gem; nsrr R package; Luna</td>
+<td><em>Approximate:</em> 42 of 55 listed datasets are tagged Polysomnography, subjects summed from their cards; some are animal studies and some (e.g., HCHS, recorded on an ARES Unicorder) are home sleep tests, so not all have full EEG. Mostly US sleep cohorts and trials (SHHS, MESA, MrOS, CHAT, NCHSDB); the site carries a banner saying it is ‘under review for potential modification’.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.kaggle.com/competitions?search=EEG">Kaggle competitions</a></td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>registration</td>
+<td>Kaggle API/CLI</td>
+<td>37 competitions match ‘EEG’; the research-tier EEG ones are seizure-detection and seizure-prediction (2014), grasp-and-lift-eeg-detection and inria-bci-challenge (2015), melbourne-university-seizure-prediction (2016) and hms-harmful-brain-activity-classification (2024). Data needs a Kaggle account and accepting each competition’s rules.</td>
+</tr>
+<tr class="even">
+<td><a href="http://bnci-horizon-2020.eu/database/data-sets">BNCI Horizon 2020 database</a></td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">344</td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>direct HTTP download; MOABB BNCI loaders</td>
+<td>29 of 32 entries carry EEG (others fNIRS or ECoG); the live site timed out today, so counts come from the 2026-10-12 Wayback snapshot. Graz University of Technology contributed 11 of the EEG sets and TU Berlin 8, almost all BCI paradigms.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://physionet.org">PhysioNet</a></td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>mixed</td>
+<td>REST project list (physionet.org/api/v1/project/published/); wfdb-python; wget</td>
+<td><em>Approximate:</em> 28 databases plus the 2018 Challenge whose metadata mention EEG or polysomnography, after removing 7 false positives; 24 are open, the rest restricted or credentialed. Sleep (Sleep-EDF, CAP, HMC), epilepsy (CHB-MIT, Siena), cardiac arrest (I-CARE) and US BCI data (EEGMMIDB, bigP3BCI); all 21 MOABB datasets sourced here are from US labs.</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.bbci.de/competition/">BBCI BCI Competitions II-IV</a></td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>direct download after click-through terms; MOABB and braindecode loaders for some</td>
+<td>16 EEG data sets across Competitions II (6), III (7 of 8, one ECoG) and IV (3 of 5, one MEG, one ECoG), from Berlin, Graz, Wadsworth and Tuebingen groups. Still the default BCI benchmarks (IV-2a is BNCI 001-2014); Competition I is hosted at Columbia.</td>
+</tr>
+<tr class="odd">
+<td><a href="http://predict.cs.unm.edu">PREDiCT (Patient Repository for EEG Data + Computational Tools)</a></td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>direct download links</td>
+<td><em>Approximate:</em> the ‘Number of Patients’ column sums to 570 across 14 task and rest datasets (Parkinson’s, mTBI, depression, OCD, schizophrenia) from the University of New Mexico. PDDL public-domain licence; 64-channel BrainVision or Neuroscan recordings.</td>
+</tr>
+<tr class="even">
+<td><a href="https://bci.med.tsinghua.edu.cn/download.html">Tsinghua University BCI Lab downloads</a></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>direct download</td>
+<td>12 datasets, mostly SSVEP (Benchmark, BETA, eldBETA, wearable, 160-target) plus RSVP and collaborative BCI. Copies reappear via Zenodo/Figshare in MOABB (Wang2016, Liu2022EldBETA) and TorchEEG (TSUBenchmark).</td>
+</tr>
+<tr class="odd">
+<td><a href="https://fcon_1000.projects.nitrc.org/indi/cmi_healthy_brain_network/">Healthy Brain Network (Child Mind Institute)</a></td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">4,140</td>
+<td style="text-align: right;"></td>
+<td>mixed</td>
+<td>NITRC/AWS for raw files; OpenNeuro ds005505-ds005516; EEGDash</td>
+<td><em>Approximate:</em> subjects sum the non-BIDS EEG column of the HBN download table for releases 1.1-11 (the 11 BIDS releases on OpenNeuro hold 3,155). Child Mind Institute’s transdiagnostic paediatric cohort; raw downloads need a NITRC login while the BIDS copies are open.</td>
+</tr>
+<tr class="even">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/">SJTU BCMI SEED datasets</a></td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>request</td>
+<td>none (application form); TorchEEG loaders after download</td>
+<td>11 SEED-family datasets (emotion, vigilance, cross-cultural, sleep deprivation, video) from Shanghai Jiao Tong University’s BCMI lab. Access via an application form; TorchEEG ships loaders for SEED, SEED-IV and SEED-V.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Corpus (Temple University Hospital)</a></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">14,987</td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>rsync over SSH after approval; braindecode TUH/TUHAbnormal/TUHEvents</td>
+<td>Official page lists TUEG v2.0.2 (26,846 recordings, 2002-2017) plus 6 labelled subsets (TUAB, TUAR, TUEP, TUEV, TUSZ, TUSL); the patient count is for TUEG v2.0.0 (14,987 patients, 26,846 sessions, 69,652 recordings) from arXiv 2401.10283. Single-hospital clinical archive; access needs a signed form emailed to NEDC, then SSH-key rsync.</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.epilepsy-database.eu">European Epilepsy Database (EPILEPSIAE)</a></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">45,000</td>
+<td>request</td>
+<td>none (licensed delivery)</td>
+<td><em>Approximate:</em> hours are a lower bound (‘&gt; 45,000 hours’); 275 annotated patient datasets from over 250 patients (200+ scalp, 60 intracranial) with over 2,500 seizures. Paid licences only (e.g., 2,500 EUR for 25 surface datasets), now sold via Campus Technologies Freiburg.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bdsp.io/content/harvard-eeg-db/4.1/">Harvard Electroencephalography Database</a></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">109,178</td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>BDSP download after credentialing; Harvard-EEG-Database-Tools on GitHub</td>
+<td>v4.1 (published 2025-02-10): 284,343 clinical EEG studies from 109,178 patients at four sites, with linked EHR. Requires BDSP credentialed status and a signed project DUA; no hours figure given.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="general-purpose-repositories" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="general-purpose-repositories">General-purpose repositories</h3>
+<p>Repositories that hold any kind of data and don’t tag EEG reliably. The count is search hits for “EEG”, which overstates how many EEG datasets they hold: Zenodo’s hits even include Germany’s renewable-energy law, which is also abbreviated EEG. Much lab-published BCI data lives here all the same.</p>
+<div id="58b41ecb" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th style="text-align: right;">Search hits</th>
+<th>Access</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://figshare.com">Figshare</a></td>
+<td style="text-align: right;">7,562</td>
+<td>open</td>
+<td>items of type dataset returned by the API search (search_for=EEG, item_type=3), which includes journal supplementary files. Hosts 17 MOABB datasets, largely Chinese groups (e.g., Tsinghua eldBETA) plus Greek MAMEM and Mexican BCI data.</td>
+</tr>
+<tr class="even">
+<td><a href="https://osf.io">OSF (Open Science Framework)</a></td>
+<td style="text-align: right;">2,689</td>
+<td>open</td>
+<td>public OSF projects matching ‘EEG’ in the SHARE index (cardSearchText=EEG, resourceType=Project; 3,349 with components), many holding code or preregistrations rather than data. Favoured by psychology/ERP labs (ERP CORE) and Korea University’s mobile and 2020-competition BCI sets in MOABB.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.kaggle.com/datasets?search=EEG">Kaggle datasets</a></td>
+<td style="text-align: right;">1,558</td>
+<td>registration</td>
+<td>unique results of ‘kaggle datasets list -s EEG’ until pages stopped returning items. Mostly user re-uploads of public datasets (e.g., an OpenNeuro ds002778 copy, SAM40), so check provenance and licence.</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org">Zenodo</a></td>
+<td style="text-align: right;">1,531</td>
+<td>mixed</td>
+<td>hits for q=EEG with type=dataset; the query also catches Germany’s renewable-energy law (EEG), and ‘electroencephalography OR electroencephalogram’ gives 421. Largest home of MOABB BCI data (54 of 206), led by French labs such as GIPSA-lab Grenoble (Brain Invaders) and Inria.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://huggingface.co/datasets?search=eeg">Hugging Face Hub</a></td>
+<td style="text-align: right;">1,001</td>
+<td>mixed</td>
+<td>datasets whose name matches ‘eeg’, of which 738 are EEGDash mirrors of NEMAR/OpenNeuro data; a further 13 datasets sit under the braindecode org. The remaining ~260 are user uploads of mixed provenance and licence.</td>
+</tr>
+<tr class="even">
+<td><a href="https://dataverse.harvard.edu">Harvard Dataverse</a></td>
+<td style="text-align: right;">535</td>
+<td>mixed</td>
+<td>datasets returned by the Search API for q=EEG, type=dataset. 10 MOABB BCI datasets live here, 7 from Chinese groups (Tianjin University, CAS, World Robot Contest) and 2 from Japan.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://data.mendeley.com">Mendeley Data</a></td>
+<td style="text-align: right;">413</td>
+<td>open</td>
+<td>results attributed to Mendeley Data for query=EEG on its search page (419 across all indexed sources). Elsevier’s repository; its 5 MOABB datasets come from Mexico, Ecuador, Indonesia and Turkey.</td>
+</tr>
+<tr class="even">
+<td><a href="https://nda.nih.gov">NIMH Data Archive (NDA)</a></td>
+<td style="text-align: right;">278</td>
+<td>DUA</td>
+<td>collections matching ‘EEG’ in NDA’s search API (80 match ‘electroencephalography’). EEG from NIH-funded mental-health studies (autism, psychosis, depression, adolescent sleep); access needs an institutionally signed Data Use Certification.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://ieee-dataport.org">IEEE DataPort</a></td>
+<td style="text-align: right;">213</td>
+<td>mixed</td>
+<td>results for site search ‘EEG’: 181 standard datasets (subscription), 24 open access, 8 competitions. Mostly single-lab engineering datasets, often from consumer headsets (e.g., the Emotiv-based STEW workload set).</td>
+</tr>
+<tr class="even">
+<td><a href="https://datadryad.org">Dryad</a></td>
+<td style="text-align: right;">157</td>
+<td>open</td>
+<td>hits for q=EEG in the Dryad search API (60 for ‘electroencephalography’). Journal-linked CC0 deposits, human and animal; few large curated EEG collections.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://gin.g-node.org">G-Node GIN</a></td>
+<td style="text-align: right;">45</td>
+<td>open</td>
+<td>public repositories matching ‘EEG’ from the GIN API, including forks and DOI copies. Small German/Swiss footprint (MPIB Berlin, USZ Zurich scalp EEG + iEEG, mouse hdEEG).</td>
+</tr>
+<tr class="even">
+<td><a href="https://search.kg.ebrains.eu">EBRAINS Knowledge Graph</a></td>
+<td style="text-align: right;">42</td>
+<td>mixed</td>
+<td>datasets matching ‘EEG’ (21 tagged electroencephalography; 13 controlled access, 12 free, 9 embargoed, 8 restricted). European Human Brain Project labs, e.g., TMS-EEG perturbational complexity and sEEG/hd-EEG stimulation studies.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.synapse.org">Synapse (Sage Bionetworks)</a></td>
+<td style="text-align: right;">25</td>
+<td>mixed</td>
+<td>public projects matching ‘EEG’ in the Synapse search API, several unrelated (e.g., mPower). Hosts TD-BRAIN (Brainclinics), BrainLat, HarMNqEEG multinational cross-spectra and FACED; access terms vary by project.</td>
+</tr>
+<tr class="even">
+<td><a href="https://dandiarchive.org">DANDI Archive</a></td>
+<td style="text-align: right;">23</td>
+<td>open</td>
+<td>dandisets matching ‘EEG’; mostly animal and intracranial (iEEG/sEEG, single-unit) recordings. DANDI is the BRAIN Initiative’s NWB archive, with little human scalp EEG.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://gigadb.org">GigaDB</a></td>
+<td style="text-align: right;">8</td>
+<td>open</td>
+<td>8 EEG datasets among the 11 hits for ‘EEG’ in the GigaDB search API. Data notes for GigaScience; all 4 MOABB datasets here are Korean (Korea University OpenBMI Lee2019, GIST Cho2017).</td>
+</tr>
+<tr class="even">
+<td><a href="https://archive.ics.uci.edu">UCI Machine Learning Repository</a></td>
+<td style="text-align: right;">4</td>
+<td>open</td>
+<td>4 datasets match ‘EEG’ in its API (EEG Database, EEG Eye State, EEG SSVEP signals, BEED epilepsy). Small, old ML-benchmark staples.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="aggregators-and-loader-libraries" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="aggregators-and-loader-libraries">Aggregators and loader libraries</h3>
+<p>Catalogs and Python packages that index or load datasets hosted elsewhere, so their counts overlap with the repositories above.</p>
+<div id="bf9708a0" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Kind</th>
+<th style="text-align: right;">Datasets</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Hours</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://eegdash.org">EEGDash</a></td>
+<td>aggregator</td>
+<td style="text-align: right;">697</td>
+<td style="text-align: right;">41,083</td>
+<td style="text-align: right;">120,657</td>
+<td><em>Approximate:</em> chart-data API totals (691 of 697 with duration), including 11 HBN ‘mini’ subsets and 11 BDF re-releases of HBN; without them 675 datasets and 37,708 subjects. Indexes NEMAR (653) and OpenNeuro (22) so it inherits their lab mix; the site headline (955 datasets, 137,716 h, all modalities) is slightly ahead of the API (952).</td>
+</tr>
+<tr class="even">
+<td><a href="https://moabb.neurotechx.com">MOABB</a></td>
+<td>loader library</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">4,500</td>
+<td style="text-align: right;"></td>
+<td><em>Approximate:</em> subjects summed across the 206 dataset classes in the docs table (develop; last release v1.7.2), and some classes share subjects. Its Repository column: Zenodo 54, PhysioNet 21, BNCI 19, Figshare 17, OSF 13, Harvard Dataverse 10, GitHub 7, Mendeley 5, GigaDB 4, OpenNeuro 3, blank 31.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/meagmohit/EEG-Datasets">meagmohit/EEG-Datasets (curated list)</a></td>
+<td>aggregator</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>Curated GitHub list (3,143 stars, last commit 2025-10-17) with 67 numbered entries in 11 paradigm sections plus an unfiltered link dump. A common discovery entry point that mostly points back to the repositories above.</td>
+</tr>
+<tr class="even">
+<td><a href="https://torcheeg.readthedocs.io">TorchEEG</a></td>
+<td>loader library</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>21 dataset loaders in v1.1.3 (latest, released 2024-12-23), weighted to affective EEG (SEED family, DEAP, DREAMER, AMIGOS, MAHNOB, FACED, MPED) plus sleep (HMC, ISRUC, Sleep-EDFx), BCI and auditory attention (KUL, DTU). Most loaders expect the raw files to be obtained first, several under request-only licences.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://braindecode.org">braindecode</a></td>
+<td>loader library</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>v2.0.0 (released 2026-11-02) ships 11 named dataset classes (TUH, TUHAbnormal, TUHEvents, SleepPhysionet, SleepPhysionetChallenge2018, CHBMIT, SIENA, NMT, HGD, BNCI2014_001, BCICompetitionIVDataset4) plus MOABBDataset, BIDSDataset and Hugging Face Hub wrappers. Its clinical and sleep coverage complements MOABB’s BCI focus; TUH classes need TUH access.</td>
+</tr>
+<tr class="even">
+<td><a href="https://mne.tools/stable/documentation/datasets.html">mne.datasets</a></td>
+<td>loader library</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>MNE 1.13.2’s overview lists 9 datasets with scalp EEG (sample, SPM faces, EEGBCI, mTRF, Kiloword, Sleep PSG, ERP CORE, SSVEP, EyeLink EEG-eyetracking); LIMO is also EEG but not labelled so. Most other fetchers are MEG, OPM, sEEG/ECoG or phantoms; teaching-sized, not benchmarks.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="brain-computer-interfaces" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="brain-computer-interfaces">Brain-computer interfaces</h2>
+<section id="motor-imagery" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="motor-imagery">Motor imagery</h3>
+<div id="8ac20003" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://physionet.org/content/eegmmidb/1.0.0/">PhysioNet EEG Motor Movement/Imagery (EEGBCI)</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">9,838</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">160</td>
+<td>open</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.5281/zenodo.8089820">Dreyer 2023 large MI database</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">20,800</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://figshare.com/articles/dataset/Human_EEG_Dataset_for_Brain-Computer_Interface_and_Meditation/13123148">Stieger 2021 continuous SMR-BCI</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">269,099</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td><a href="https://plus.figshare.com/articles/dataset/Brain_Computer_Interface_Motor_Imagery-EEG_Dataset/22671172">WBCIC-SHU multi-day MI (Yang 2025)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">40,500</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.34894/Z7ZVOD">Leeuwis 2021 MI with psychological factors</a></td>
+<td>DataverseNL</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">8,800</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.5524/100542">OpenBMI (Lee 2019) MI</a></td>
+<td>GigaDB</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">21,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="odd">
+<td><a href="http://dx.doi.org/10.5524/100295">Cho 2017 GIST MI</a></td>
+<td>GigaDB</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">10,520</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td><a href="https://figshare.com/articles/dataset/EEG_datasets_of_stroke_patients/21679035">Liu 2024 acute stroke MI</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">2,000</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.1184/R1/32293995.v1">Wang 2026 sensory-guided MI training</a></td>
+<td>KiltHub (Figshare)</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2026</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds004444">Iwama 2023 high-density SMR-BCI</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">19,200</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://figshare.com/articles/dataset/28740260">Zuo 2025 lower-limb MI (knee pain)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">15,000</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="even">
+<td><a href="http://doc.ml.tu-berlin.de/hBCI">Shin 2017 hybrid EEG-NIRS MI</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">1,740</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td><a href="https://zenodo.org/records/19021436">Jeong 2020 11 upper-limb tasks</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">41,250</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">2,500</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.7910/DVN/RBN3XG">Ma 2020 same-limb joints MI</a></td>
+<td>Harvard Dataverse</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">15,000</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="odd">
+<td><a href="https://nemar.org/dataexplorer/detail?dataset_id=nm000288">SHU cross-session MI (Ma 2022)</a></td>
+<td>NEMAR</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">11,988</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/18988317">Zhou 2021 7-day MI</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">33,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.57745/RBJRC7">NETBCI longitudinal MI (Corsi 2026)</a></td>
+<td>Recherche Data Gouv</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">14,431</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2026</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Steyrl 2016 right hand vs feet MI</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">2,240</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2016</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.6084/m9.figshare.c.3917698">Kaya 2018 large MI dataset</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">60,000</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2018</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Faller 2012 autocalibration MI</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">5,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2012</td>
+</tr>
+<tr class="odd">
+<td><a href="http://dx.doi.org/10.7910/DVN/27306">Yi 2014 simple and compound limb MI</a></td>
+<td>Harvard Dataverse</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5,540</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2014</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">BCI Competition IV 2a (Graz)</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">5,184</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2012</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">BCI Competition IV 2b (Graz)</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">6,520</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Scherer 2015 mental tasks (end users)</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.bbci.de/competition/iv/">BCI Competition IV 1 (Berlin)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2012</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.bbci.de/competition/iii/">BCI Competition III IVa (Berlin)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1,400</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2004</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.bbci.de/competition/iii/">BCI Competition III IIIa (Graz)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2006</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.bbci.de/competition/iii/">BCI Competition III V (IDIAP)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2006</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="motor-execution" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="motor-execution">Motor execution</h3>
+<div id="83e191c8" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Schwarz 2020 reach-and-grasp</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">7,200</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Ofner 2017 upper-limb movements</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">12,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td><a href="https://web.gin.g-node.org/robintibor/high-gamma-dataset/">High-Gamma Dataset (Schirrmeister 2017)</a></td>
+<td>G-Node GIN</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">13,484</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.6084/m9.figshare.c.988376.v2">WAY-EEG-GAL (Kaggle Grasp-and-Lift)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">3,936</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2014</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="erp-p300" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="erp-p300">ERP / P300</h3>
+<div id="8d4e46a2" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://physionet.org/content/bigp3bci/1.0.0/">bigP3BCI (Mainsah 2025)</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">326</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.5281/zenodo.3266223">Brain Invaders 2014a</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="odd">
+<td><a href="http://bci.med.tsinghua.edu.cn/download.html">Tsinghua RSVP benchmark (Zhang 2020)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">10,240</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.6084/m9.figshare.c.5769449.v1">Won 2022 RSVP and P300 speller</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.5524/100542">OpenBMI (Lee 2019) ERP</a></td>
+<td>GigaDB</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.5281/zenodo.3267307">Brain Invaders 2015b (multi-user)</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.5281/zenodo.3266930">Brain Invaders 2015a</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.kaggle.com/competitions/inria-bci-challenge">BCI Challenge @ NER 2015 (Kaggle)</a></td>
+<td>Kaggle</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">8,840</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">200</td>
+<td>registration</td>
+<td>2014</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.5281/zenodo.1494163">Brain Invaders 2013a</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://osf.io/r7s9b/">Mobile BCI ERP (Lee 2021)</a></td>
+<td>OSF</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">AMUSE auditory spatial ERP</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2011</td>
+</tr>
+<tr class="even">
+<td><a href="http://doi.org/10.5281/zenodo.192684">Hübner 2017 label-proportion speller</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td><a href="https://freidok.uni-freiburg.de/data/154576">Sosulski 2019 auditory oddball SOA</a></td>
+<td>FreiDok</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Arico 2014 P300 speller</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2014</td>
+</tr>
+<tr class="odd">
+<td><a href="http://bci.epfl.ch/p300">EPFL P300 (Hoffmann 2008)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2,048</td>
+<td>open</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td><a href="https://bnci-horizon-2020.eu/database/data-sets">Riccio 2013 ALS P300 speller</a></td>
+<td>BNCI Horizon 2020</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2013</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.bbci.de/competition/iii/">BCI Competition III II (Wadsworth P300)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">370</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">240</td>
+<td>open</td>
+<td>2006</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.bbci.de/competition/ii/">BCI Competition II IIb (Wadsworth P300)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">240</td>
+<td>open</td>
+<td>2004</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="ssvep" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="ssvep">SSVEP</h3>
+<div id="0b9bc3e6" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://doi.org/10.6084/m9.figshare.13560281">Wearable SSVEP dataset (Zhu 2021)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">24,480</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.6084/m9.figshare.18032669">eldBETA SSVEP (elderly)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">6,300</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="http://bci.med.tsinghua.edu.cn/download.html">BETA SSVEP benchmark</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">11,200</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/18847318">Dong 2023 adolescent SSVEP</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">9,440</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.5524/100542">OpenBMI (Lee 2019) SSVEP</a></td>
+<td>GigaDB</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">21,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.6084/m9.figshare.28806815.v2">Kim 2025 beta-range 40-class SSVEP</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">9,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">1,024</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="odd">
+<td><a href="http://bci.med.tsinghua.edu.cn/download.html">Tsinghua SSVEP benchmark (Wang 2016)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">8,400</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2016</td>
+</tr>
+<tr class="even">
+<td><a href="https://dx.doi.org/10.6084/m9.figshare.2068677.v1">MAMEM SSVEP dataset 1</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">256</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2016</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/mnakanishi/12JFPM_SSVEP">Nakanishi 2015 12-class SSVEP</a></td>
+<td>GitHub</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1,800</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="c-vep" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="c-vep">c-VEP</h3>
+<div id="18da6b78" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://doi.org/10.6084/m9.figshare.24864243">Zheng 2024 narrow-band c-VEP</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">36,000</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.34973/9txv-z787">Thielen 2021 zero-training c-VEP</a></td>
+<td>Radboud Data Repository</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">3,000</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.71569/025s-eq10">Martínez-Cagigal 2023 p-ary c-VEP</a></td>
+<td>Universidad de Valladolid repository</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/record/8255618">Castillos 2023 burst c-VEP</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">2,880</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.34973/1ecz-1232">Thielen 2015 broad-band VEP</a></td>
+<td>Radboud Data Repository</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2,048</td>
+<td>open</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="clinical-sleep-and-resting-state" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="clinical-sleep-and-resting-state">Clinical, sleep and resting state</h2>
+<section id="epilepsy-clinical" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="epilepsy-clinical">Epilepsy &amp; clinical</h3>
+<div id="cc9e3dc2" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://dll.seecs.nust.edu.pk/downloads/">NMT Scalp EEG Dataset</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">2,417</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">625</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH Abnormal EEG Corpus (TUAB)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;">2,329</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1,142</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.kaggle.com/competitions/hms-harmful-brain-activity-classification">HMS Harmful Brain Activity Classification</a></td>
+<td>Kaggle</td>
+<td style="text-align: right;">1,950</td>
+<td style="text-align: right;">106,800</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">200</td>
+<td>registration</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.brainclinics.com/resources/tdbrain-dataset">TDBRAIN</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">1,274</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">500</td>
+<td>DUA</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/ipis-mjkim/caueeg-dataset">CAUEEG</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">1,155</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">200</td>
+<td>request</td>
+<td>2023</td>
+</tr>
+<tr class="even">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Seizure Corpus (TUSZ)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;">675</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1,475</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2018</td>
+</tr>
+<tr class="odd">
+<td><a href="https://physionet.org/content/i-care/2.1/">I-CARE (post-cardiac-arrest coma EEG)</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">607</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32,712</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="even">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Artifact Corpus (TUAR)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Epilepsy Corpus (TUEP)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">627</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds004584">Iowa Parkinson’s eyes-open rest (ds004584)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds005873">SeizeIT2 wearable epilepsy dataset</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">125</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">11,640</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds003478">Depression rest (ds003478)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://ieee-dataport.org/open-access/eeg-data-adhd-control-children">EEG data for ADHD/control children</a></td>
+<td>IEEE DataPort</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">128</td>
+<td>registration</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds004504">Alzheimer’s, FTD and healthy resting EEG (ds004504)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds003944">First-episode psychosis rest (ds003944)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/2547147">Helsinki neonatal EEG seizure dataset</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="odd">
+<td><a href="https://figshare.com/articles/dataset/EEG_Data_New/4244171">MDD patients and healthy controls EEG (Mumtaz)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2016</td>
+</tr>
+<tr class="even">
+<td><a href="http://modma.lzu.edu.cn/data/index/">MODMA (multi-modal mental-disorder dataset)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">250</td>
+<td>DUA</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds003490">Parkinson’s 3-stim oddball and rest (ds003490)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Slowing Corpus (TUSL)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds002778">UC San Diego Parkinson’s resting EEG (ds002778)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.18150/repod.0107441">EEG in schizophrenia (RepOD)</a></td>
+<td>RepOD</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td><a href="https://physionet.org/content/chbmit/1.0.0/">CHB-MIT Scalp EEG Database</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">983</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2010</td>
+</tr>
+<tr class="even">
+<td><a href="https://physionet.org/content/siena-scalp-eeg/1.0.0/">Siena Scalp EEG Database</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.ukbonn.de/epileptologie/arbeitsgruppen/ag-lehnertz-neurophysik/downloads/">Bonn University EEG (sets A-E)</a></td>
+<td>Lab website</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">174</td>
+<td>open</td>
+<td>2001</td>
+</tr>
+<tr class="even">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Events Corpus (TUEV)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="sleep" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sleep">Sleep</h3>
+<div id="f5ca406b" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://bdsp.io/content/hsp/">Human Sleep Project (HSP)</a></td>
+<td>BDSP</td>
+<td style="text-align: right;">90,166</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2026</td>
+</tr>
+<tr class="even">
+<td><a href="https://sleepdata.org/datasets/shhs">Sleep Heart Health Study (SHHS)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;">5,804</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">125</td>
+<td>DUA</td>
+<td>1997</td>
+</tr>
+<tr class="odd">
+<td><a href="https://sleepdata.org/datasets/nchsdb">NCH Sleep DataBank (NCHSDB)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;">3,673</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td><a href="https://sleepdata.org/datasets/mros">Osteoporotic Fractures in Men sleep (MrOS)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;">2,911</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">256</td>
+<td>DUA</td>
+<td>2011</td>
+</tr>
+<tr class="odd">
+<td><a href="https://sleepdata.org/datasets/mesa">Multi-Ethnic Study of Atherosclerosis sleep (MESA)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;">2,056</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">256</td>
+<td>DUA</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td><a href="https://physionet.org/content/challenge-2018/1.0.0/">PhysioNet/CinC Challenge 2018 (You Snooze You Win)</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">1,985</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">15,261</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2018</td>
+</tr>
+<tr class="odd">
+<td><a href="https://sleepdata.org/datasets/cfs">Cleveland Family Study (CFS)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;">735</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">128</td>
+<td>DUA</td>
+<td>1995</td>
+</tr>
+<tr class="even">
+<td><a href="https://sleepdata.org/datasets/chat">Childhood Adenotonsillectomy Trial (CHAT)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;">464</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">200</td>
+<td>DUA</td>
+<td>2013</td>
+</tr>
+<tr class="odd">
+<td><a href="http://ceams-carsm.ca/mass/">Montreal Archive of Sleep Studies (MASS)</a></td>
+<td>Borealis</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>request</td>
+<td>2014</td>
+</tr>
+<tr class="even">
+<td><a href="https://physionet.org/content/hmc-sleep-staging/1.1/">Haaglanden Medisch Centrum sleep staging (HMC)</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">151</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1,144</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://sleeptight.isr.uc.pt/">ISRUC-Sleep</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2016</td>
+</tr>
+<tr class="even">
+<td><a href="https://physionet.org/content/capslpdb/1.0.0/">CAP Sleep Database</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2012</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds005555">Bitbrain Open Access Sleep (BOAS)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://physionet.org/content/sleep-edfx/1.0.0/">Sleep-EDF Expanded</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3,849</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">100</td>
+<td>open</td>
+<td>2013</td>
+</tr>
+<tr class="odd">
+<td><a href="https://zenodo.org/records/15900394">Dreem Open Dataset - Obstructive (DOD-O)</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/15900394">Dreem Open Dataset - Healthy (DOD-H)</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="odd">
+<td><a href="https://sleepdata.org/datasets/wsc">Wisconsin Sleep Cohort (WSC)</a></td>
+<td>NSRR</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="resting-state" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="resting-state">Resting state</h3>
+<div id="31c7e55b" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds005385">Dortmund Vital Study resting EEG (ds005385)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">608</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://chbmp-open.loris.ca">Cuban Human Brain Mapping Project (CHBMP)</a></td>
+<td>Synapse</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">200</td>
+<td>registration</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://fcon_1000.projects.nitrc.org/indi/retro/MPI_LEMON.html">MPI Leipzig Mind-Brain-Body (LEMON)</a></td>
+<td>INDI (NITRC)</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">2,500</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds003775">SRM resting-state EEG (ds003775)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">1,024</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds004148">Test-retest resting and cognitive state EEG (ds004148)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="large-corpus" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="large-corpus">Large corpus</h3>
+<div id="7a8f2bd8" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://bdsp.io/content/harvard-eeg-db/">Harvard Electroencephalography Database (HEEDB)</a></td>
+<td>BDSP</td>
+<td style="text-align: right;">109,178</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2025</td>
+</tr>
+<tr class="even">
+<td><a href="https://isip.piconepress.com/projects/nedc/html/tuh_eeg/">TUH EEG Corpus (TUEG)</a></td>
+<td>TUH EEG</td>
+<td style="text-align: right;">14,987</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">27,074</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2016</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds005505">Healthy Brain Network EEG (HBN-EEG)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">3,155</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="cognition-emotion-and-perception" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="cognition-emotion-and-perception">Cognition, emotion and perception</h2>
+<section id="affective" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="affective">Affective</h3>
+<div id="19283100" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://doi.org/10.7303/syn50614194">FACED</a></td>
+<td>Synapse</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">3,444</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;"></td>
+<td>registration</td>
+<td>2023</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/10205702">EAV</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">8,400</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">500</td>
+<td>DUA</td>
+<td>2024</td>
+</tr>
+<tr class="odd">
+<td><a href="http://www.eecs.qmul.ac.uk/mmv/datasets/amigos/">AMIGOS</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">788</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">128</td>
+<td>DUA</td>
+<td>2018</td>
+</tr>
+<tr class="even">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-SD.html">SEED-SD</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">2,880</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>DUA</td>
+<td>2025</td>
+</tr>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds003004">Imagined Emotion (ds003004)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.eecs.qmul.ac.uk/mmv/datasets/deap/">DEAP</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">1,280</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">512</td>
+<td>DUA</td>
+<td>2012</td>
+</tr>
+<tr class="odd">
+<td><a href="https://mahnob-db.eu/hci-tagging/">MAHNOB-HCI</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">540</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;"></td>
+<td>registration</td>
+<td>2012</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/546113">DREAMER</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">414</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">128</td>
+<td>request</td>
+<td>2018</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-vii.html">SEED-VII</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1,600</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>DUA</td>
+<td>2025</td>
+</tr>
+<tr class="even">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-v.html">SEED-V</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">720</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed.html">SEED</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">675</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>DUA</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-iv.html">SEED-IV</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,080</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;"></td>
+<td>DUA</td>
+<td>2019</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-FRA.html">SEED-FRA</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">504</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>DUA</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-GER.html">SEED-GER</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>DUA</td>
+<td>2022</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visual-perception" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="visual-perception">Visual perception</h3>
+<div id="f1dec51b" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://openneuro.org/datasets/ds003825">THINGS-EEG1</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td><a href="https://huggingface.co/datasets/Alljoined/Alljoined-1.6M">Alljoined-1.6M</a></td>
+<td>Hugging Face</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1,670,400</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">256</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bcmi.sjtu.edu.cn/home/eeg2video/">SEED-DV</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">200</td>
+<td>DUA</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds002718">Wakeman-Henson faces (ds002718)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/Promise-Z5Q2SQ/EEG-ImageNet-Dataset">EEG-ImageNet</a></td>
+<td>Tsinghua Cloud</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">87,850</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds002680">Go/no-go categorization (ds002680)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2004</td>
+</tr>
+<tr class="odd">
+<td><a href="https://purl.stanford.edu/tc919dd5388">Object Category EEG Dataset (OCED)</a></td>
+<td>Stanford Digital Repository</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">51,840</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td><a href="https://osf.io/3jk45/">THINGS-EEG2</a></td>
+<td>OSF</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">821,600</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://huggingface.co/datasets/Alljoined/05_125">Alljoined1</a></td>
+<td>Hugging Face</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">46,080</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/perceivelab/eeg_visual_classification">Spampinato EEG-ImageNet (PeRCeiVe)</a></td>
+<td>Google Drive</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">11,964</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="auditory-speech" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="auditory-speech">Auditory &amp; speech</h3>
+<div id="65b9b7e3" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://doi.org/10.48804/K3VSND">SparrKULee</a></td>
+<td>KU Leuven RDR</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">8,192</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/3618205">DTU hearing-impaired AAD</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="odd">
+<td><a href="https://zenodo.org/records/3554128">FEIS</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds003774">MUSIN-G (ds003774)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">250</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://purl.stanford.edu/jn859kj8079">NMED-T</a></td>
+<td>Stanford Digital Repository</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds004408">Natural speech (Broderick/Di Liberto, ds004408)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">380</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2018</td>
+</tr>
+<tr class="odd">
+<td><a href="https://zenodo.org/records/1199011">DTU AAD</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/4004271">KU Leuven AAD</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">320</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">8,192</td>
+<td>open</td>
+<td>2016</td>
+</tr>
+<tr class="odd">
+<td><a href="https://osf.io/pq7vb/">BCI Competition 2020 Track 3 imagined speech</a></td>
+<td>OSF</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5,250</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.cs.toronto.edu/~complingweb/data/karaOne/karaOne.html">Kara One</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td><a href="https://zenodo.org/records/11058711">AV-GC-AAD</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">8,192</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds003626">Inner Speech (Nieto)</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5,640</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,024</td>
+<td>open</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/sstober/openmiir">OpenMIIR</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">512</td>
+<td>open</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds005170">Chisco</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="language" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="language">Language</h3>
+<div id="13b98392" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://deepblue.lib.umich.edu/data/concern/data_sets/bg257f92t">Alice EEG (Brennan)</a></td>
+<td>Deep Blue Data</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds005383">TMNRED</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">200</td>
+<td>open</td>
+<td>2025</td>
+</tr>
+<tr class="odd">
+<td><a href="https://osf.io/rkqbu/">DERCo</a></td>
+<td>OSF</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td><a href="https://osf.io/2urht/">ZuCo 2.0</a></td>
+<td>OSF</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2020</td>
+</tr>
+<tr class="odd">
+<td><a href="https://osf.io/q3zws/">ZuCo 1.0</a></td>
+<td>OSF</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2018</td>
+</tr>
+<tr class="even">
+<td><a href="https://openneuro.org/datasets/ds004952">ChineseEEG</a></td>
+<td>OpenNeuro</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="cognitive" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="cognitive">Cognitive</h3>
+<div id="2f592702" class="cell page-columns page-full">
+<div class="cell-output cell-output-display cell-output-markdown column-page">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Host</th>
+<th style="text-align: right;">Subjects</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Channels</th>
+<th style="text-align: right;">Hz</th>
+<th>Access</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://ieee-dataport.org/open-access/stew-simultaneous-task-eeg-workload-dataset">STEW</a></td>
+<td>IEEE DataPort</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">128</td>
+<td>registration</td>
+<td>2018</td>
+</tr>
+<tr class="even">
+<td><a href="https://osf.io/thsqg/">ERP CORE</a></td>
+<td>OSF</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1,024</td>
+<td>open</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td><a href="https://physionet.org/content/eegmat/1.0.0/">EEGMAT (mental arithmetic)</a></td>
+<td>PhysioNet</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://zenodo.org/records/7413650">COG-BCI</a></td>
+<td>Zenodo</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2023</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.6084/m9.figshare.6427334.v5">Sustained-attention driving (Cao)</a></td>
+<td>Figshare</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">500</td>
+<td>open</td>
+<td>2019</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.14279/depositonce-5830.2">Shin 2018 n-back/DSR/WG (EEG-NIRS)</a></td>
+<td>DepositOnce (TU Berlin)</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1,000</td>
+<td>open</td>
+<td>2018</td>
+</tr>
+<tr class="odd">
+<td><a href="https://bcmi.sjtu.edu.cn/home/seed/seed-vig.html">SEED-VIG</a></td>
+<td>Lab website</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1,000</td>
+<td>DUA</td>
+<td>2017</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="corrections-and-additions" class="level2">
+<h2 class="anchored" data-anchor-id="corrections-and-additions">Corrections and additions</h2>
+<p>Spotted a wrong number or a missing dataset? Edit the CSV and open a pull request, or <a href="https://github.com/bkowshik/temple-of-eeg-decoding/issues">open an issue</a> with a link to the dataset’s page.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bkowshik\.github\.io\/temple-of-eeg-decoding");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bkowshik/temple-of-eeg-decoding/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
