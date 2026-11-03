@@ -10,12 +10,17 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [{name = "Bhargav Kowshik", email = "bhargav.kowshik@gmail.com"}]
-keywords = ['nbdev']
+keywords = ["eeg", "decoding", "nbdev", "jupyter"]
 classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
 ]
 dependencies = []
+
+[project.optional-dependencies]
+dev = ["nbdev", "jupyterlab"]
 
 [project.urls]
 Repository = "https://github.com/bkowshik/temple-of-eeg-decoding"
