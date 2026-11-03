@@ -1,0 +1,14 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "eegtemple"
+  site-url: "https://bkowshik.github.io/temple-of-eeg-decoding"
+  description: "Building a temple of EEG decoding, brick by brick."
+  repo-branch: main
+  repo-url: "https://github.com/bkowshik/temple-of-eeg-decoding"
+
+format-links:
+  - html
+  - format: commonmark
+    text: Markdown

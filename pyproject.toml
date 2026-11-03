@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eegtemple"
+dynamic = ["version"]
+description = "Building a temple of EEG decoding, brick by brick."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Bhargav Kowshik", email = "bhargav.kowshik@gmail.com"}]
+keywords = ['nbdev']
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/bkowshik/temple-of-eeg-decoding"
+Documentation = "https://bkowshik.github.io/temple-of-eeg-decoding/"
+
+[project.entry-points.nbdev]
+eegtemple = "eegtemple._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "eegtemple.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["eegtemple"]
+
+[tool.nbdev]
